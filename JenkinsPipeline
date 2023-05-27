@@ -11,15 +11,15 @@ pipeline{
             steps{
                 sh 'docker build -t wordpress .'
                 withCredentials([string(credentialsId: 'dockerhub_password', variable: 'password')]) {
-                  sh 'docker login -u toni31416 -p ${password}'              
+                    sh 'docker login -u toni31416 -p ${password}'              
                 }
   				sh 'docker tag wordpress toni31416/wordpress'
                 sh 'docker push toni31416/wordpress'
             }
         }
-        stage('run kubernetes YAML')
+        stage('Run kubernetes YAML')
         {
-          sh 'kubectl create -f wordpress.yml'
+            sh 'kubectl create -f wordpress.yml'
         }
     }
 }
