@@ -1,8 +1,7 @@
 pipeline{    
     agent any    
     stages{        
-        stage('Clone the repo')
-        {
+        stage('Clone the repo'){
             steps{
                 git 'https://github.com/toni31416/Course_DevOps_Deployment_WordPress_Kubernetes.git'
             }
@@ -17,9 +16,10 @@ pipeline{
                 sh 'docker push toni31416/wordpress'
             }
         }
-        stage('Run kubernetes YAML')
-        {
-            sh 'kubectl create -f wordpress.yml'
+        stage('Run kubernetes YAML'){
+            steps{
+                sh 'kubectl create -f wordpress.yml'
+            }
         }
     }
 }
