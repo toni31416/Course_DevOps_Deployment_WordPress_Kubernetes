@@ -1,0 +1,25 @@
+pipeline{    
+    agent any    
+    stages{        
+        stage('Clone the repo')
+        {
+            steps{
+                git 'https://github.com/Sonal0409/DevOps-WordPress-Kubernetes-Deployment.git'
+            }
+        }        
+        stage('Build the dockerfile'){
+            steps{
+                sh 'docker build -t wordpress .'
+                withCredentials([string(credentialsId: 'dockerhub_passwrod', variable: 'password')]) {
+                  sh 'docker login -u sonal04 -p ${password}'              
+                }
+  				sh 'docker tag wordpress sonal04/wordpress'
+                sh 'docker push sonal04/wordpress'
+            }
+        }
+        stage('run kubernetes YAML')
+        {
+          sh 'kubectl create -f wordpress.yml'
+        }
+    }
+}
