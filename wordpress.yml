@@ -31,7 +31,7 @@ spec:
         product: mysql
     spec:
       containers:
-      - image: mysql:5.7
+      - image: mysql
         name: mysql-container
         env:
         - name: MYSQL_DATABASE
