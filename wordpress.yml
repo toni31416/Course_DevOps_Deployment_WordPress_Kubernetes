@@ -12,19 +12,7 @@ spec:
   selector:
     app: mysql-wordpress
     product: mysql
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pv-claim
-  labels:
-    app: mysql-wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -51,13 +39,6 @@ spec:
           value: wordpress
         - name: MYSQL_ROOT_PASSWORD
           value: password
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv-claim
 
 ---
 apiVersion: v1
