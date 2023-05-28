@@ -3,7 +3,7 @@ pipeline{
     stages{        
         stage('Clone the repo'){
             steps{
-                git 'https://github.com/toni31416/Course_DevOps_Deployment_WordPress_Kubernetes.git'
+                git branch: 'main', url: 'https://github.com/toni31416/Course_DevOps_Deployment_WordPress_Kubernetes.git'
             }
         }        
         stage('Build the dockerfile'){
