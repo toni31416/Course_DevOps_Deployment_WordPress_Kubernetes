@@ -1,12 +1,12 @@
 pipeline{    
     agent any    
     stages{        
-        stage('Clone the repo'){
+        stage('Clone Repo'){
             steps{
                 git branch: 'main', url: 'https://github.com/toni31416/Course_DevOps_Deployment_WordPress_Kubernetes.git'
             }
         }        
-        stage('Build the dockerfile'){
+        stage('Build WP Image'){
             steps{
                 sh 'docker build -t wordpress .'
                 withCredentials([string(credentialsId: 'dockerhub_password', variable: 'password')]) {
